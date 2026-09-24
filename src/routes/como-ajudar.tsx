@@ -53,7 +53,7 @@ function VolunteerForm() {
               className={on ? "rounded-full border border-navy bg-navy px-3 py-1.5 text-sm text-primary-foreground" : "rounded-full border border-border px-3 py-1.5 text-sm hover:border-navy"}>{a}</button>;
           })}
         </div>
-        {errors.areas && <p className="mt-1 text-sm text-destructive">{errors.areas}</p>}
+        {errors["areas"] && <p className="mt-1 text-sm text-destructive">{errors["areas"]}</p>}
       </fieldset>
       <button className="w-full rounded-md bg-cta py-3 font-bold text-primary-foreground hover:bg-cta-hover">Quero ser voluntário</button>
     </form>
