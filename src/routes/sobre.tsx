@@ -64,14 +64,9 @@ function Sobre() {
           <SectionTitle eyebrow="Equipe e liderança" title="Quem conduz a CES-MT" />
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {TEAM.map((m) => (
-              <div key={m.role} className="flex items-center gap-4 rounded-lg border border-border bg-card p-5">
-                <div className="grid h-14 w-14 place-items-center rounded-full bg-navy font-serif text-lg text-primary-foreground" aria-hidden>
-                  {m.name.split(" ").pop()?.[0] || m.name[0]}
-                </div>
-                <div>
-                  <p className="font-semibold text-navy">{m.name}</p>
-                  <p className="text-sm text-muted-foreground">{m.role}</p>
-                </div>
+              <div key={m.role} className="flex flex-col justify-center rounded-lg border border-border bg-card p-5 shadow-xs">
+                <p className="font-semibold text-base text-navy">{m.name}</p>
+                <p className="mt-1 text-sm text-muted-foreground">{m.role}</p>
               </div>
             ))}
           </div>
