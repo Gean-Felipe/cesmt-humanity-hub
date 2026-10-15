@@ -1,17 +1,47 @@
-/** Marca provisória — substituir pela logo oficial da CES-MT quando enviada. */
-export function Logo() {
+interface LogoProps {
+  className?: string;
+  variant?: "light" | "dark";
+  size?: "sm" | "md" | "lg";
+}
+
+export function Logo({ className = "", variant = "light", size = "md" }: LogoProps) {
+  const sizeClasses = {
+    sm: "h-8 w-8",
+    md: "h-11 w-11",
+    lg: "h-14 w-14",
+  };
+
+  const titleClasses = {
+    sm: "text-lg font-bold",
+    md: "text-xl font-bold",
+    lg: "text-2xl font-bold",
+  };
+
+  const subtitleClasses = {
+    sm: "text-[10px]",
+    md: "text-[11px]",
+    lg: "text-[12px]",
+  };
+
+  const textColor = variant === "dark" ? "text-navy" : "text-white";
+  const subtextColor = variant === "dark" ? "text-navy/80" : "text-white/80";
+
   return (
-    <span className="flex items-center gap-3">
-      <span className="grid h-11 w-11 place-items-center rounded-full border-2 border-primary-foreground" aria-hidden>
-        <span className="relative h-6 w-6">
-          <span className="absolute left-1/2 top-0 h-6 w-1.5 -translate-x-1/2 bg-cta" />
-          <span className="absolute left-0 top-1.5 h-1.5 w-6 bg-cta" />
-        </span>
-      </span>
+    <span className={`inline-flex items-center gap-3 ${className}`}>
+      <img
+        src="/logo.svg"
+        alt="Logo ONG CES-MT"
+        className={`${sizeClasses[size]} shrink-0 drop-shadow-sm object-contain`}
+      />
       <span className="leading-tight">
-        <span className="block font-serif text-xl font-bold tracking-wide">CES-MT</span>
-        <span className="block text-[11px] uppercase tracking-[0.18em] opacity-80">Cristo é o Salvador</span>
+        <span className={`block font-serif tracking-wide ${titleClasses[size]} ${textColor}`}>
+          CES-MT
+        </span>
+        <span className={`block uppercase tracking-[0.18em] font-semibold ${subtitleClasses[size]} ${subtextColor}`}>
+          Cristo é o Salvador
+        </span>
       </span>
     </span>
   );
 }
+

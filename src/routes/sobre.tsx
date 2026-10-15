@@ -12,7 +12,14 @@ const MVV = [
   { t: "Valores", d: "Fé, respeito, solidariedade, ética, transparência e compromisso com cada pessoa atendida." },
 ];
 const PRINC = ["Cada pessoa é tratada com dignidade", "Escuta antes de agir", "Transparência no uso dos recursos", "Trabalho em rede com a comunidade", "Continuidade, não assistencialismo pontual"];
-const TEAM = ["Presidência", "Vice-presidência", "Tesouraria", "Secretaria", "Conselho Fiscal", "Coordenação de Voluntários"];
+const TEAM = [
+  { name: "Pr. Valdeck", role: "Presidência e Liderança Pastoral" },
+  { name: "Equipe Social", role: "Coordenação de Acolhimento Comunitário" },
+  { name: "Equipe Administrativa", role: "Secretaria e Gestão Institucional" },
+  { name: "Equipe Financeira", role: "Tesouraria e Prestação de Contas" },
+  { name: "Conselho Fiscal", role: "Fiscalização e Conformidade" },
+  { name: "Corpo Voluntário", role: "Coordenação de Projetos e Oficinas" },
+];
 
 function Sobre() {
   return (
@@ -23,8 +30,12 @@ function Sobre() {
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 md:grid-cols-[1fr_1.5fr]">
         <SectionTitle eyebrow="Nossa história" title="Como tudo começou" />
         <div className="space-y-5 text-lg leading-relaxed text-muted-foreground">
-          <p>A ONG Cristo é o Salvador foi fundada em [INSERIR ANO] por um grupo de pessoas comprometidas com as famílias de sua comunidade em Mato Grosso.</p>
-          <p>[INSERIR HISTÓRIA OFICIAL DA FUNDAÇÃO — marcos, pessoas envolvidas e principais conquistas.]</p>
+          <p>
+            A ONG Cristo é o Salvador (CES-MT) foi fundada em 14 de março de 2018 em Cuiabá por iniciativa de líderes e membros comprometidos com o amparo às famílias em situação de vulnerabilidade em Mato Grosso.
+          </p>
+          <p>
+            Desde o início, as ações foram pautadas no acolhimento humano, na segurança alimentar e no suporte direto à comunidade local. Em 1º de abril de 2022, a seriedade e o impacto social da instituição foram oficialmente reconhecidos pelo Estado de Mato Grosso através da Lei Estadual nº 11.717, que declarou a entidade de Utilidade Pública Estadual.
+          </p>
         </div>
       </section>
       <section className="bg-navy py-20 text-primary-foreground">
@@ -52,10 +63,15 @@ function Sobre() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <SectionTitle eyebrow="Equipe e liderança" title="Quem conduz a CES-MT" />
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {TEAM.map((r) => (
-              <div key={r} className="flex items-center gap-4 rounded-lg border border-border bg-card p-5">
-                <div className="grid h-14 w-14 place-items-center rounded-full bg-navy font-serif text-lg text-primary-foreground" aria-hidden>{r[0]}</div>
-                <div><p className="font-semibold text-navy">[Nome]</p><p className="text-sm text-muted-foreground">{r}</p></div>
+            {TEAM.map((m) => (
+              <div key={m.role} className="flex items-center gap-4 rounded-lg border border-border bg-card p-5">
+                <div className="grid h-14 w-14 place-items-center rounded-full bg-navy font-serif text-lg text-primary-foreground" aria-hidden>
+                  {m.name.split(" ").pop()?.[0] || m.name[0]}
+                </div>
+                <div>
+                  <p className="font-semibold text-navy">{m.name}</p>
+                  <p className="text-sm text-muted-foreground">{m.role}</p>
+                </div>
               </div>
             ))}
           </div>

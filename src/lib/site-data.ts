@@ -6,16 +6,20 @@
 export const ORG = {
   name: "ONG Cristo é o Salvador",
   short: "CES-MT",
-  cnpj: "[INSERIR CNPJ]",
-  address: "[INSERIR ENDEREÇO OFICIAL], Mato Grosso",
-  phone: "[INSERIR TELEFONE]",
-  whatsapp: "[INSERIR WHATSAPP OFICIAL]",
-  whatsappLink: null as string | null, // ex.: "https://wa.me/5565999999999"
-  email: "[INSERIR E-MAIL INSTITUCIONAL]",
-  hours: "Segunda a sexta, [INSERIR HORÁRIO]",
+  cnpj: "30.948.606/0001-14",
+  address: "Rua Rio Grande, nº 56, Bairro Novo Horizonte, Cuiabá - MT, CEP 78058-667",
+  phone: "(65) 99284-0737",
+  whatsapp: "(65) 99284-0737",
+  whatsappLink: "https://wa.me/5565992840737?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20as%20a%C3%A7%C3%B5es%20da%20ONG%20CES-MT.",
+  email: "ongcesmt@gmail.com",
+  hours: "Segunda a sexta, das 08h às 17h",
+  social: {
+    instagram: "https://www.instagram.com/ongcesmt7/",
+    facebook: "https://www.facebook.com/p/ONG-Cristo-Salvador-100069717335311/?locale=pt_BR",
+  },
   pix: [
-    { label: "PIX 1 — Chave CNPJ", key: "[INSERIR CHAVE PIX]" },
-    { label: "PIX 2 — Chave aleatória", key: "[INSERIR CHAVE PIX]" },
+    { label: "PIX 1 — Chave Celular", key: "65992335537" },
+    { label: "PIX 2 — Chave Celular", key: "65992840737" },
   ],
 } as const;
 
@@ -25,7 +29,6 @@ export const NAV = [
   { to: "/projetos", label: "Projetos" },
   { to: "/atividades", label: "Atividades" },
   { to: "/galeria", label: "Galeria" },
-  { to: "/como-ajudar", label: "Como Ajudar" },
   { to: "/contato", label: "Contato" },
 ] as const;
 

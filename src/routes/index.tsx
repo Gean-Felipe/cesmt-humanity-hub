@@ -27,7 +27,7 @@ function Home() {
             <p className="mt-6 max-w-xl text-lg leading-relaxed opacity-85">Há anos a CES-MT caminha ao lado de famílias, crianças e jovens de Mato Grosso, levando cuidado, dignidade e esperança a quem mais precisa.</p>
             <div className="mt-10 flex flex-wrap gap-3">
               <Link to="/sobre" className="inline-flex items-center gap-2 rounded-md border border-primary-foreground/40 px-6 py-3 font-semibold hover:bg-navy-2">Conheça nosso trabalho <ArrowRight className="h-4 w-4" /></Link>
-              <Link to="/como-ajudar" className="rounded-md bg-cta px-6 py-3 font-bold hover:bg-cta-hover">QUERO AJUDAR</Link>
+              <Link to="/contato" className="rounded-md bg-cta px-6 py-3 font-bold hover:bg-cta-hover">QUERO AJUDAR</Link>
             </div>
           </div>
           <blockquote className="border-l-4 border-cta pl-6 font-serif text-2xl italic leading-snug opacity-90">
@@ -94,7 +94,7 @@ function Home() {
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-4 py-14 sm:px-6 md:flex-row md:items-center">
           <h2 className="max-w-2xl text-3xl font-semibold">Seu tempo também transforma. Seja voluntário ou fale com a gente.</h2>
           <div className="flex gap-3">
-            <Link to="/como-ajudar" className="rounded-md bg-navy px-6 py-3 font-semibold hover:bg-navy-2">Ser voluntário</Link>
+            <Link to="/contato" className="rounded-md bg-navy px-6 py-3 font-semibold hover:bg-navy-2">Ser voluntário</Link>
             <Link to="/contato" className="rounded-md border border-primary-foreground px-6 py-3 font-semibold hover:bg-cta-hover">Contato</Link>
           </div>
         </div>

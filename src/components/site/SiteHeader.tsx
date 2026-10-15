@@ -21,7 +21,7 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <Link to="/como-ajudar" className="hidden rounded-md bg-cta px-5 py-2.5 text-sm font-bold tracking-wide text-primary-foreground transition-colors hover:bg-cta-hover sm:inline-flex">
+          <Link to="/contato" className="hidden rounded-md bg-cta px-5 py-2.5 text-sm font-bold tracking-wide text-primary-foreground transition-colors hover:bg-cta-hover sm:inline-flex">
             QUERO AJUDAR
           </Link>
           <Sheet open={open} onOpenChange={setOpen}>
@@ -35,7 +35,7 @@ export function SiteHeader() {
                     activeProps={{ className: "text-cta" }}>{n.label}</Link>
                 ))}
               </nav>
-              <Link to="/como-ajudar" onClick={() => setOpen(false)} className="mt-8 block rounded-md bg-cta py-3 text-center font-bold hover:bg-cta-hover">QUERO AJUDAR</Link>
+              <Link to="/contato" onClick={() => setOpen(false)} className="mt-8 block rounded-md bg-cta py-3 text-center font-bold hover:bg-cta-hover">QUERO AJUDAR</Link>
             </SheetContent>
           </Sheet>
         </div>

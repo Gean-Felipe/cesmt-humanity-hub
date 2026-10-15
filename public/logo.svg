@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Heart Outline -->
+  <path
+    d="M50 90 C22 68 6 48 6 28 C6 14 18 5 33 5 C42 5 47 10 50 14 C53 10 58 5 67 5 C82 5 94 14 94 28 C94 48 78 68 50 90 Z"
+    fill="none"
+    stroke="#EF4444"
+    stroke-width="8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <!-- Red Figure -->
+  <circle cx="35" cy="45" r="5.5" fill="#EF4444" />
+  <path d="M35 52 C31 62 21 72 17 80 C24 76 37 70 43 57 Z" fill="#EF4444" />
+  <!-- Blue Figure 1 -->
+  <circle cx="63" cy="43" r="5.5" fill="#3B82F6" />
+  <path d="M63 50 C59 62 48 74 42 83 C50 79 65 70 71 57 Z" fill="#3B82F6" />
+  <!-- Blue Figure 2 (Child) -->
+  <circle cx="53" cy="56" r="4" fill="#60A5FA" />
+  <path d="M53 61 C49 70 42 78 37 84 C44 81 54 74 58 66 Z" fill="#60A5FA" />
+</svg>
