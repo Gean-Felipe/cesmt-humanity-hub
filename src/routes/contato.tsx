@@ -2,7 +2,7 @@ import { useState, type FormEvent } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { toast } from "sonner";
-import { Check, MessageCircle } from "lucide-react";
+import { Check, Clock, Facebook, Instagram, Mail, MapPin, MessageCircle } from "lucide-react";
 import { PageHero, SectionTitle, meta } from "@/components/site/PageHero";
 import { PixCard } from "@/components/site/PixCard";
 import { ORG } from "@/lib/site-data";
@@ -59,11 +59,29 @@ function Contato() {
 
   const info = [
     {
+      icon: MapPin,
+      k: "Endereço",
+      v: ORG.address,
+      href: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ORG.address)}`,
+      target: "_blank",
+    },
+    {
       icon: MessageCircle,
       k: "WhatsApp",
       v: ORG.whatsapp,
       href: ORG.whatsappLink,
       target: "_blank",
+    },
+    {
+      icon: Mail,
+      k: "E-mail",
+      v: ORG.email,
+      href: `mailto:${ORG.email}`,
+    },
+    {
+      icon: Clock,
+      k: "Atendimento",
+      v: ORG.hours,
     },
   ];
 
@@ -165,6 +183,28 @@ function Contato() {
               </li>
             ))}
           </ul>
+
+          <div className="flex items-center gap-3 pt-1">
+            <span className="text-sm font-bold text-navy mr-1">Redes Sociais:</span>
+            <a
+              href={ORG.social.instagram}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram da ONG CES-MT"
+              className="grid h-9 w-9 place-items-center rounded-full bg-navy text-primary-foreground transition-all hover:bg-cta hover:text-white"
+            >
+              <Instagram className="h-4 w-4" />
+            </a>
+            <a
+              href={ORG.social.facebook}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Facebook da ONG CES-MT"
+              className="grid h-9 w-9 place-items-center rounded-full bg-navy text-primary-foreground transition-all hover:bg-cta hover:text-white"
+            >
+              <Facebook className="h-4 w-4" />
+            </a>
+          </div>
 
           <a
             href={ORG.whatsappLink}

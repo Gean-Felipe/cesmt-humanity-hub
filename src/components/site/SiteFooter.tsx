@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Facebook, MessageCircle } from "lucide-react";
+import { Instagram, Facebook, MessageCircle, Mail, MapPin } from "lucide-react";
 import { NAV, ORG } from "@/lib/site-data";
 import { Logo } from "./Logo";
 
@@ -59,10 +59,20 @@ export function SiteFooter() {
         <div>
           <h2 className="mb-4 font-sans text-xs font-bold uppercase tracking-[0.2em] text-cta">Contato</h2>
           <ul className="space-y-2.5 text-sm opacity-85">
+            <li className="flex items-start gap-2">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-cta" />
+              <span>{ORG.address}</span>
+            </li>
             <li className="flex items-center gap-2">
               <MessageCircle className="h-4 w-4 shrink-0 text-cta" />
               <a href={ORG.whatsappLink} target="_blank" rel="noreferrer" className="hover:text-cta hover:underline">
                 WhatsApp: {ORG.whatsapp}
+              </a>
+            </li>
+            <li className="flex items-center gap-2">
+              <Mail className="h-4 w-4 shrink-0 text-cta" />
+              <a href={`mailto:${ORG.email}`} className="hover:text-cta hover:underline">
+                {ORG.email}
               </a>
             </li>
           </ul>
