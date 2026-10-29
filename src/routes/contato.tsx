@@ -45,16 +45,73 @@ const FIELDS: { f: Field; label: string }[] = [
 
 function Contato() {
   const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const r = schema.safeParse(Object.fromEntries(new FormData(e.currentTarget)));
+    if (isSubmitting) return;
+
+    const formEl = e.currentTarget;
+    const formData = new FormData(formEl);
+    const website = String(formData.get("website") || "");
+    const rawData = Object.fromEntries(formData);
+    const r = schema.safeParse(rawData);
+
     if (!r.success) {
       setErrors(Object.fromEntries(r.error.issues.map((i) => [i.path[0], i.message])));
       return;
     }
+
     setErrors({});
-    e.currentTarget.reset();
-    toast.success("Mensagem enviada! Responderemos em breve pelo WhatsApp.");
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: r.data.nome,
+          email: r.data.email,
+          phone: r.data.telefone,
+          subject: r.data.assunto,
+          message: r.data.mensagem,
+          website,
+        }),
+      });
+
+      const payload = (await response.json().catch(() => ({}))) as {
+        ok?: boolean;
+        message?: string;
+        errors?: Record<string, string>;
+      };
+
+      if (response.ok && payload.ok) {
+        formEl.reset();
+        toast.success(
+          payload.message || "Mensagem enviada com sucesso para o e-mail institucional da ONG CES-MT!"
+        );
+      } else {
+        if (payload.errors) {
+          setErrors({
+            nome: payload.errors.name,
+            email: payload.errors.email,
+            telefone: payload.errors.phone,
+            assunto: payload.errors.subject,
+            mensagem: payload.errors.message,
+          });
+        }
+        toast.error(
+          payload.message ||
+            "Não foi possível concluir o envio por e-mail neste momento. Por favor, tente novamente ou fale conosco pelo WhatsApp."
+        );
+      }
+    } catch {
+      toast.error(
+        "Falha de conexão ao enviar sua mensagem. Verifique sua internet ou fale conosco diretamente pelo WhatsApp."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const info = [
@@ -130,6 +187,14 @@ function Contato() {
             Dúvidas, pedidos de apoio, interesse em voluntariado ou parcerias? Envie sua mensagem abaixo.
           </p>
           <form onSubmit={onSubmit} noValidate className="mt-8 grid gap-5 sm:grid-cols-2">
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              className="hidden"
+              aria-hidden="true"
+            />
             {FIELDS.map(({ f, label }) => (
               <div key={f}>
                 <Label htmlFor={f}>{label}</Label>
@@ -138,6 +203,7 @@ function Contato() {
                   name={f}
                   type={f === "email" ? "email" : "text"}
                   className="mt-1.5"
+                  disabled={isSubmitting}
                   aria-invalid={!!errors[f]}
                 />
                 {errors[f] && <p className="mt-1 text-sm text-destructive">{errors[f]}</p>}
@@ -150,12 +216,17 @@ function Contato() {
                 name="mensagem"
                 rows={6}
                 className="mt-1.5"
+                disabled={isSubmitting}
                 aria-invalid={!!errors.mensagem}
               />
               {errors.mensagem && <p className="mt-1 text-sm text-destructive">{errors.mensagem}</p>}
             </div>
-            <button className="rounded-md bg-cta py-3 font-bold text-primary-foreground transition-colors hover:bg-cta-hover sm:col-span-2 cursor-pointer">
-              Enviar mensagem
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="rounded-md bg-cta py-3 font-bold text-primary-foreground transition-colors hover:bg-cta-hover disabled:opacity-60 sm:col-span-2 cursor-pointer"
+            >
+              {isSubmitting ? "Enviando mensagem..." : "Enviar mensagem"}
             </button>
           </form>
         </div>

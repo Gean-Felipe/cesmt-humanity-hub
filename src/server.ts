@@ -2,6 +2,7 @@ import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
+import { processContactSubmission, type ContactRequestBody } from "../api/contact";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -47,6 +48,56 @@ function isH3SwallowedErrorBody(body: string): boolean {
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
+      const url = new URL(request.url);
+      if (url.pathname === "/api/contact") {
+        if (request.method !== "POST") {
+          return new Response(
+            JSON.stringify({
+              ok: false,
+              code: "METHOD_NOT_ALLOWED",
+              message: "Método não permitido. Utilize POST.",
+            }),
+            {
+              status: 405,
+              headers: {
+                "content-type": "application/json; charset=utf-8",
+                Allow: "POST",
+              },
+            }
+          );
+        }
+
+        let parsedBody: ContactRequestBody = {};
+        try {
+          parsedBody = (await request.json()) as ContactRequestBody;
+        } catch {
+          return new Response(
+            JSON.stringify({
+              ok: false,
+              code: "INVALID_JSON",
+              message: "Formato de requisição inválido.",
+            }),
+            {
+              status: 400,
+              headers: { "content-type": "application/json; charset=utf-8" },
+            }
+          );
+        }
+
+        const forwarded = request.headers.get("x-forwarded-for");
+        const clientIp = forwarded ? forwarded.split(",")[0].trim() : "127.0.0.1";
+        const runtimeEnv = {
+          ...(typeof process !== "undefined" ? process.env : {}),
+          ...(env && typeof env === "object" ? (env as Record<string, string | undefined>) : {}),
+        };
+
+        const result = await processContactSubmission(parsedBody, clientIp, runtimeEnv);
+        return new Response(JSON.stringify(result.payload), {
+          status: result.status,
+          headers: { "content-type": "application/json; charset=utf-8" },
+        });
+      }
+
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
       return await normalizeCatastrophicSsrResponse(response);

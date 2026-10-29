@@ -56,20 +56,29 @@ export function SiteFooter() {
           </ul>
         </div>
 
-        <div>
+        <div className="flex flex-col items-center text-center">
           <h2 className="mb-4 font-sans text-xs font-bold uppercase tracking-[0.2em] text-cta">Contato</h2>
-          <ul className="space-y-2.5 text-sm opacity-85">
-            <li className="flex items-start gap-2">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-cta" />
-              <span>{ORG.address}</span>
+          <ul className="space-y-3 text-sm opacity-85">
+            <li className="flex flex-col items-center gap-1">
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-cta">
+                <MapPin className="h-3.5 w-3.5 shrink-0" /> Endereço
+              </span>
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ORG.address)}`}
+                target="_blank"
+                rel="noreferrer"
+                className="max-w-xs leading-relaxed hover:text-cta hover:underline"
+              >
+                {ORG.address}
+              </a>
             </li>
-            <li className="flex items-center gap-2">
+            <li className="flex items-center justify-center gap-2 pt-1">
               <MessageCircle className="h-4 w-4 shrink-0 text-cta" />
               <a href={ORG.whatsappLink} target="_blank" rel="noreferrer" className="hover:text-cta hover:underline">
                 WhatsApp: {ORG.whatsapp}
               </a>
             </li>
-            <li className="flex items-center gap-2">
+            <li className="flex items-center justify-center gap-2">
               <Mail className="h-4 w-4 shrink-0 text-cta" />
               <a href={`mailto:${ORG.email}`} className="hover:text-cta hover:underline">
                 {ORG.email}

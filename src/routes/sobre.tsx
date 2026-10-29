@@ -13,12 +13,48 @@ const MVV = [
 ];
 const PRINC = ["Cada pessoa é tratada com dignidade", "Escuta antes de agir", "Transparência no uso dos recursos", "Trabalho em rede com a comunidade", "Continuidade, não assistencialismo pontual"];
 const TEAM = [
-  { name: "Pr. Valdeck", role: "Presidência e Liderança Pastoral" },
-  { name: "Equipe Social", role: "Coordenação de Acolhimento Comunitário" },
-  { name: "Equipe Administrativa", role: "Secretaria e Gestão Institucional" },
-  { name: "Equipe Financeira", role: "Tesouraria e Prestação de Contas" },
-  { name: "Conselho Fiscal", role: "Fiscalização e Conformidade" },
-  { name: "Corpo Voluntário", role: "Coordenação de Projetos e Oficinas" },
+  {
+    name: "Pr. Valdeck",
+    role: "Presidência e Liderança Pastoral",
+    responsibilities:
+      "Representação institucional e legal da ONG CES-MT, condução pastoral, planejamento estratégico das frentes comunitárias e articulação com parceiros e poder público.",
+    pendingNote: null,
+  },
+  {
+    name: "Equipe Social",
+    role: "Coordenação de Acolhimento Comunitário",
+    responsibilities:
+      "Cadastro socioeconômico e escuta qualificada das famílias, visitas domiciliares, triagem de demandas emergenciais e organização das entregas de cestas básicas e do Mercadinho Solidário.",
+    pendingNote: "Identificação nominal da coordenação social pendente de confirmação documental.",
+  },
+  {
+    name: "Equipe Administrativa",
+    role: "Secretaria e Gestão Institucional",
+    responsibilities:
+      "Gestão documental, atas, certidões institucionais, atendimento na sede, controle de cadastros e suporte operacional às atividades semanais da organização.",
+    pendingNote: "Identificação nominal da secretaria executiva pendente de confirmação documental.",
+  },
+  {
+    name: "Equipe Financeira",
+    role: "Tesouraria e Prestação de Contas",
+    responsibilities:
+      "Controle de receitas e despesas, gestão das doações recebidas via PIX, organização de comprovantes fiscais e elaboração de balancetes para prestação de contas.",
+    pendingNote: "Identificação nominal da tesouraria pendente de confirmação documental.",
+  },
+  {
+    name: "Conselho Fiscal",
+    role: "Fiscalização e Conformidade",
+    responsibilities:
+      "Verificação periódica dos relatórios contábeis, acompanhamento da correta aplicação dos recursos doados e emissão de pareceres de conformidade estatutária.",
+    pendingNote: "Composição nominal dos conselheiros fiscais pendente de confirmação em ata vigente.",
+  },
+  {
+    name: "Corpo Voluntário",
+    role: "Coordenação de Projetos e Oficinas",
+    responsibilities:
+      "Planejamento e execução das oficinas socioeducativas, reforço escolar, apoio logístico na coleta de doações e mobilização nas campanhas comunitárias.",
+    pendingNote: "Relação nominal de coordenadores de oficinas em atualização cadastral.",
+  },
 ];
 
 function Sobre() {
@@ -64,9 +100,20 @@ function Sobre() {
           <SectionTitle eyebrow="Equipe e liderança" title="Quem conduz a CES-MT" />
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {TEAM.map((m) => (
-              <div key={m.role} className="flex flex-col justify-center rounded-lg border border-border bg-card p-5 shadow-xs">
-                <p className="font-semibold text-base text-navy">{m.name}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{m.role}</p>
+              <div key={m.role} className="flex flex-col justify-between rounded-lg border border-border bg-card p-5 shadow-xs">
+                <div>
+                  <p className="font-semibold text-base text-navy">{m.name}</p>
+                  <p className="mt-1 text-xs font-bold uppercase tracking-wider text-cta">{m.role}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    <span className="font-semibold text-foreground">Responsabilidades: </span>
+                    {m.responsibilities}
+                  </p>
+                </div>
+                {m.pendingNote && (
+                  <p className="mt-3 border-t border-border pt-2.5 text-xs italic text-muted-foreground">
+                    {m.pendingNote}
+                  </p>
+                )}
               </div>
             ))}
           </div>
